@@ -1,0 +1,77 @@
+{
+  "name": "za-id-validator",
+  "description": "Validates a South African National Identification Number against it's check digit at the end of the number.",
+  "version": "0.0.2",
+  "main": "build/index.js",
+  "scripts": {
+    "init": "rimraf .validate.json && rimraf .jshintrc",
+    "clean": "rimraf build",
+    "lint": "eslint source test",
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack && npm run build:min && npm run build:doc",
+    "build:min": "NODE_ENV=production MINIFY=1 webpack",
+    "build:doc": "doctoc --github --title \"## Contents\" ./",
+    "start": "webpack --watch",
+    "test": "babel-node test/index.js",
+    "cov": "npm run cov:clean && npm run cov:generate",
+    "cov:clean": "rimraf coverage",
+    "cov:generate": "babel-node node_modules/.bin/isparta cover --report text --report html test/index.js",
+    "prepublish": "npm run build",
+    "validate": "npm run lint && npm run build && npm test",
+    "validate-dev": "npm run lint && npm run build && npm test | faucet",
+    "audit": "nsp check",
+    "deps": "npm run deps:missing && npm run deps:extra",
+    "deps:missing": "dependency-check package.json",
+    "deps:extra": "dependency-check package.json --extra --no-dev --ignore",
+    "precheck": "npm run validate",
+    "check": "npm run audit && npm run deps && npm outdated --depth 0"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.2",
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "doctoc": "^1.0.0",
+    "dependency-check": "^2.5.1",
+    "eslint-loader": "^1.2.1",
+    "faucet": "^0.0.1",
+    "isparta": "^4.0.0",
+    "eslint": "^1.10.3",
+    "eslint-loader": "^1.0.0",
+    "tape": "^4.4.0",
+    "precommit-hook": "^3.0.0",
+    "nsp": "^2.2.0",
+    "rimraf": "^2.5.1",
+    "webpack": "^1.12.13"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:picsadotcom/za-id-validator.git"
+  },
+  "keywords": [
+    "id number",
+    "south africa",
+    "za"
+  ],
+  "author": "Rudolf Meijering",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/picsadotcom/za-id-validator/issues"
+  },
+  "homepage": "https://github.com/picsadotcom/za-id-validator#readme"
+}
