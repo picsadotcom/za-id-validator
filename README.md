@@ -2,8 +2,8 @@ Validates a South African National Identification Number against it's check digi
 
 Usage:
 ```
-var validate = require('za-id-validator');
-var id = '8001015009087';
+import validate from 'za-id-validator';
+const id = '8001015009087';
 if(validate(id)){
   console.log(id, ' is a valid ZA ID number');
 } else {

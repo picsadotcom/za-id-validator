@@ -21,6 +21,7 @@ module.exports = {
 
   output: {
     filename: minify ? 'index.min.js' : 'index.js',
+    libraryTarget: 'commonjs2',
     path: path.resolve('./build')
   },
 
